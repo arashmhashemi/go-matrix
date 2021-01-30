@@ -41,3 +41,22 @@ func TestEcho(t *testing.T) {
 		}
 	}
 }
+
+func TestInvert(t *testing.T) {
+	var testData = []struct {
+		input [][]string
+		want  string
+	}{
+		{data[0].input, "1\n"},
+		{data[1].input, "1,4,7\n2,5,8\n3,6,9\n"},
+		//{data[2].input, "11,12,13,14\n21,22,23,24\n31,32,33,34\n41,42,43,44\n"},
+	}
+
+	for _, testItem := range testData {
+		got := invert(testItem.input)
+
+		if got != testItem.want {
+			t.Errorf("got %q, want %q", got, testItem.want)
+		}
+	}
+}

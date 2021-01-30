@@ -15,6 +15,9 @@ func main() {
 	http.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
 		handle(w, r, echo)
 	})
+	http.HandleFunc("/invert", func(w http.ResponseWriter, r *http.Request) {
+		handle(w, r, invert)
+	})
 
 	http.ListenAndServe(":8080", nil)
 }
