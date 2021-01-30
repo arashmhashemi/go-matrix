@@ -18,6 +18,9 @@ func main() {
 	http.HandleFunc("/invert", func(w http.ResponseWriter, r *http.Request) {
 		handle(w, r, invert)
 	})
+	http.HandleFunc("/flatten", func(w http.ResponseWriter, r *http.Request) {
+		handle(w, r, flatten)
+	})
 
 	http.ListenAndServe(":8080", nil)
 }

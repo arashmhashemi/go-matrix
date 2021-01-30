@@ -29,3 +29,17 @@ func invert(records [][]string) string {
 
 	return response
 }
+
+func flatten(records [][]string) string {
+	var response string
+
+	for i, row := range records {
+		if i == 0 {
+			response = strings.Join(row, ",")
+		} else {
+			response = fmt.Sprintf("%s,%s", response, strings.Join(row, ","))
+		}
+	}
+
+	return response + "\n"
+}
