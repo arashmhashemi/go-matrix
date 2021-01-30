@@ -90,3 +90,22 @@ func TestFlatten(t *testing.T) {
 		}
 	}
 }
+
+func TestSum(t *testing.T) {
+	var testData = []struct {
+		input [][]string
+		want  string
+	}{
+		{getMatrix(0), "1\n"},
+		{getMatrix(1), "45\n"},
+		{getMatrix(2), "440\n"},
+	}
+
+	for _, testItem := range testData {
+		got := sum(testItem.input)
+
+		if got != testItem.want {
+			t.Errorf("got %q, want %q", got, testItem.want)
+		}
+	}
+}

@@ -21,6 +21,9 @@ func main() {
 	http.HandleFunc("/flatten", func(w http.ResponseWriter, r *http.Request) {
 		handle(w, r, flatten)
 	})
+	http.HandleFunc("/sum", func(w http.ResponseWriter, r *http.Request) {
+		handle(w, r, sum)
+	})
 
 	http.ListenAndServe(":8080", nil)
 }

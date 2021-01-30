@@ -1,3 +1,3 @@
 module github.com/arashmhashemi/go-matrix
 
-go 1.14
+go 1.15

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -42,4 +43,21 @@ func flatten(records [][]string) string {
 	}
 
 	return response + "\n"
+}
+
+func sum(records [][]string) string {
+	var result int
+
+	for i := 0; i < len(records); i++ {
+		for j := 0; j < len(records[i]); j++ {
+			x, err := strconv.Atoi(records[i][j])
+			if err == nil {
+				result += x
+			} else {
+				fmt.Println(err.Error())
+			}
+		}
+	}
+
+	return strconv.Itoa(result) + "\n"
 }
