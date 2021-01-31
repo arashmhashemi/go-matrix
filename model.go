@@ -55,9 +55,45 @@ func sum(records [][]string) string {
 				result += x
 			} else {
 				fmt.Println(err.Error())
+				return "Error!"
 			}
 		}
 	}
 
 	return strconv.Itoa(result) + "\n"
+}
+
+func multiply(records [][]string) string {
+	var result int64 = 1
+	var ok bool
+
+	for i := 0; i < len(records); i++ {
+		for j := 0; j < len(records[i]); j++ {
+			x, err := strconv.ParseInt(records[i][j], 10, 64)
+			if err == nil {
+				result, ok = mul64(x, result)
+				if !ok {
+					return "Overflow!\n"
+				}
+			} else {
+				fmt.Println(err.Error())
+				return "Error!\n"
+			}
+		}
+	}
+
+	return strconv.FormatInt(result, 10) + "\n"
+}
+
+func mul64(a, b int64) (int64, bool) {
+	if a == 0 || b == 0 {
+		return 0, true
+	}
+	c := a * b
+	if (c < 0) == ((a < 0) != (b < 0)) {
+		if c/b == a {
+			return c, true
+		}
+	}
+	return c, false
 }

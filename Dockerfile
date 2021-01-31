@@ -8,6 +8,8 @@ RUN go build -o main .
 FROM alpine:3.13 AS final
 WORKDIR /app
 COPY --from=build /app/main .
+COPY --from=build /app/static ./static
 
-EXPOSE 8080
+ENV GO_PORT=80
+EXPOSE 80
 CMD ["/app/main"]

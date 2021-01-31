@@ -109,3 +109,22 @@ func TestSum(t *testing.T) {
 		}
 	}
 }
+
+func TestMultiply(t *testing.T) {
+	var testData = []struct {
+		input [][]string
+		want  string
+	}{
+		{getMatrix(0), "1\n"},
+		{getMatrix(1), "362880\n"},
+		{getMatrix(2), "Overflow!\n"},
+	}
+
+	for _, testItem := range testData {
+		got := multiply(testItem.input)
+
+		if got != testItem.want {
+			t.Errorf("got %q, want %q", got, testItem.want)
+		}
+	}
+}

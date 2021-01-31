@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 // Run with
@@ -24,8 +25,19 @@ func main() {
 	http.HandleFunc("/sum", func(w http.ResponseWriter, r *http.Request) {
 		handle(w, r, sum)
 	})
+	http.HandleFunc("/multiply", func(w http.ResponseWriter, r *http.Request) {
+		handle(w, r, multiply)
+	})
 
-	http.ListenAndServe(":8080", nil)
+	fs := http.FileServer(http.Dir("./static"))
+	http.Handle("/", fs)
+
+	port := os.Getenv("GO_PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	http.ListenAndServe(":"+port, nil)
 }
 
 func handle(w http.ResponseWriter, r *http.Request, fn func([][]string) string) {
