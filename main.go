@@ -2,9 +2,11 @@ package main
 
 import (
 	"encoding/csv"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 // Run with
@@ -60,6 +62,30 @@ func readFile(r *http.Request) ([][]string, error) {
 	records, err := csv.NewReader(file).ReadAll()
 	if err != nil {
 		return nil, err
+	}
+
+	// TODO: properly return error codes and text + documentation
+	// TODO: add unit test for the validation logic
+
+	if len(records) == 0 {
+		return nil, errors.New("Validation Error: input file must have at least 1 record\n")
+	}
+	if len(records) != len(records[0]) {
+		return nil, errors.New("Validation Error: input file must have equal rows and columns (be square)\n")
+	}
+	for i, row := range records {
+		for j, r := range row {
+			v, err := strconv.Atoi(r)
+			if err != nil {
+				return nil,
+					errors.New(fmt.Sprintf("Validation Error: input file must be a valid csv file containing integers with values > 0. Please check (row: %d, col: %d, val: %v).\n", i, j, r))
+			}
+
+			if v < 0 {
+				return nil,
+					errors.New(fmt.Sprintf("Validation Error: input file must be a valid csv file containing integers with values > 0. Please check (row: %d, col: %d, val: %v).\n", i, j, r))
+			}
+		}
 	}
 
 	return records, nil

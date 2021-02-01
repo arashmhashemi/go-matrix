@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Echos an input matrix without any changes
 func echo(records [][]string) string {
 	var response string
 
@@ -16,6 +17,11 @@ func echo(records [][]string) string {
 	return response
 }
 
+// Returns the matrix as a string in matrix format where the columns and rows are inverted
+// example:
+// 1,2,3		1,4,7
+// 4,5,6   ==>	2,5,8
+// 7,8,9		3,6,9
 func invert(records [][]string) string {
 	var response string
 
@@ -31,6 +37,11 @@ func invert(records [][]string) string {
 	return response
 }
 
+// Returns the matrix as a 1 line string, with values separated by commas
+// example:
+// 1,2,3
+// 4,5,6   ==>	1,2,3,4,5,6,7,8,9
+// 7,8,9
 func flatten(records [][]string) string {
 	var response string
 
@@ -45,6 +56,10 @@ func flatten(records [][]string) string {
 	return response + "\n"
 }
 
+// Returns the sum of the integers in the matrix
+// 1,2,3
+// 4,5,6   ==>	45
+// 7,8,9
 func sum(records [][]string) string {
 	var result int
 
@@ -63,6 +78,10 @@ func sum(records [][]string) string {
 	return strconv.Itoa(result) + "\n"
 }
 
+// Return the product of the integers in the matrix. If overflow happens, returns 'Overflow!'
+// 1,2,3
+// 4,5,6   ==>	362880
+// 7,8,9
 func multiply(records [][]string) string {
 	var result int64 = 1
 	var ok bool
@@ -85,6 +104,7 @@ func multiply(records [][]string) string {
 	return strconv.FormatInt(result, 10) + "\n"
 }
 
+// multiplies two numbers and checks for overflow.
 func mul64(a, b int64) (int64, bool) {
 	if a == 0 || b == 0 {
 		return 0, true
